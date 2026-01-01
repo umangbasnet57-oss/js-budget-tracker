@@ -1,1 +1,41 @@
+const descInput = document.getElementById("descInput");
+const amountInput = document.getElementById("amountInput");
+const typeInput = document.getElementById("typeInput");
+const addBtn = document.getElementById("addBtn");
 
+const list = document.getElementById("list");
+const incomeEl = document.getElementById("income");
+const expenseEl = document.getElementById("expense");
+const balanceEl = document.getElementById("balance");
+
+let income = 0;
+let expense = 0;
+
+addBtn.addEventListener("click", function () {
+  const desc = descInput.value;
+  const amount = Number(amountInput.value);
+  const type = typeInput.value;
+
+  if (desc === "" || amount === 0) {
+    alert("Please enter valid data");
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.textContent = `${desc} : $${amount} (${type})`;
+
+  list.appendChild(li);
+
+  if (type === "income") {
+    income += amount;
+  } else {
+    expense += amount;
+  }
+
+  incomeEl.textContent = income;
+  expenseEl.textContent = expense;
+  balanceEl.textContent = income - expense;
+
+  descInput.value = "";
+  amountInput.value = "";
+});
